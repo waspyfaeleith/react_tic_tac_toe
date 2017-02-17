@@ -9481,19 +9481,28 @@ var Game = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 
-    _this.state = { winner: "", player: "X", turns: 0, won: false };
+    var grid = ["", "", "", "", "", "", "", "", ""];
+    _this.state = { winner: "", player: "X", turns: 0, won: false, board: grid };
     return _this;
   }
 
   _createClass(Game, [{
     key: 'reset',
     value: function reset() {
-      this.setState({ winner: "", player: "X", turns: 0, won: false });
+      var grid = ["", "", "", "", "", "", "", "", ""];
+      this.setState({ winner: "", player: "X", turns: 0, won: false, board: grid });
     }
   }, {
     key: 'setWinner',
     value: function setWinner() {
       this.setState({ winner: this.state.player, won: true });
+    }
+  }, {
+    key: 'updateBoard',
+    value: function updateBoard(square) {
+      var updatedGrid = this.state.board;
+      updatedGrid[square] = this.state.player;
+      this.setState({ board: updatedGrid });
     }
   }, {
     key: 'switchPlayer',
@@ -9512,9 +9521,9 @@ var Game = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_Board2.default, { player: this.state.player, changePlayer: this.switchPlayer.bind(this), endGame: this.setWinner.bind(this),
-          won: this.state.won, turns: this.state.turns }),
+          won: this.state.won, turns: this.state.turns, update: this.updateBoard.bind(this), board: this.state.board }),
         _react2.default.createElement(_GameStatus2.default, { winner: this.state.winner, currentPlayer: this.state.player, won: this.state.won, turns: this.state.turns }),
-        _react2.default.createElement(_NewGame2.default, { won: this.state.won, startNewGame: this.reset.bind(this) })
+        _react2.default.createElement(_NewGame2.default, { won: this.state.won, turns: this.state.turns, startNewGame: this.reset.bind(this) })
       );
     }
   }]);
@@ -9573,14 +9582,20 @@ var Board = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
     var grid = ["", "", "", "", "", "", "", "", ""];
-    _this.state = { board: grid, won: false };
+    _this.state = { board: _this.props.board, won: false };
     return _this;
   }
 
   _createClass(Board, [{
+    key: 'resetGrid',
+    value: function resetGrid() {
+      var grid = ["", "", "", "", "", "", "", "", ""];
+      this.setState = { board: grid, won: false };
+    }
+  }, {
     key: 'checkRowsForWinner',
     value: function checkRowsForWinner() {
-      var board = this.state.board;
+      var board = this.props.board;
       if (board[0] !== "" && board[0] === board[1] && board[0] === board[2] || board[3] !== "" && board[3] === board[4] && board[3] === board[5] || board[6] !== "" && board[6] === board[7] && board[6] === board[8]) {
 
         console.log("winning row:", this.props.player);
@@ -9591,7 +9606,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'checkColumnsForWinner',
     value: function checkColumnsForWinner() {
-      var board = this.state.board;
+      var board = this.props.board;
       if (board[0] !== "" && board[0] == board[3] && board[0] === board[6] || board[1] !== "" && board[1] === board[4] && board[1] === board[7] || board[5] !== "" && board[2] === board[5] && board[2] === board[8]) {
         console.log("winning column:", this.props.player);
         return true;
@@ -9601,8 +9616,8 @@ var Board = function (_React$Component) {
   }, {
     key: 'checkDiagonalsForWinner',
     value: function checkDiagonalsForWinner() {
-      var board = this.state.board;
-      if (board[4] !== "" && board[0] === board[4] && board[0] === board[8] || board[2] === board[4] && board[2] === board[6]) {
+      var board = this.props.board;
+      if (board[4] !== "" && (board[0] === board[4] && board[0] === board[8] || board[2] === board[4] && board[2] === board[6])) {
         console.log("winning diagonal:", this.props.player);
         return true;
       }
@@ -9629,7 +9644,9 @@ var Board = function (_React$Component) {
     key: 'takeTurn',
     value: function takeTurn(square) {
       console.log("takeTurn:", this.props.player, square);
-      this.updateGrid(this.props.player, square);
+      //this.updateGrid(this.props.player, square);  
+      this.props.update(square);
+      this.checkForWinner();
       console.log("won:", this.state.won);
     }
   }, {
@@ -9646,6 +9663,7 @@ var Board = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var board = this.props.board;
       return _react2.default.createElement(
         'div',
         null,
@@ -9667,19 +9685,19 @@ var Board = function (_React$Component) {
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 0, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[0] })
+                  contents: board[0] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 1, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[1] })
+                  contents: board[1] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 2, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[2] })
+                  contents: board[2] })
               )
             ),
             _react2.default.createElement(
@@ -9689,19 +9707,19 @@ var Board = function (_React$Component) {
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 3, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[3] })
+                  contents: board[3] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 4, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[4] })
+                  contents: board[4] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 5, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[5] })
+                  contents: board[5] })
               )
             ),
             _react2.default.createElement(
@@ -9711,19 +9729,19 @@ var Board = function (_React$Component) {
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 6, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[6] })
+                  contents: board[6] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 7, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[7] })
+                  contents: board[7] })
               ),
               _react2.default.createElement(
                 'td',
                 null,
                 _react2.default.createElement(_Cell2.default, { id: 8, player: this.props.player, playSquare: this.takeTurn.bind(this), gameWon: this.props.won,
-                  contents: this.state.board[8] })
+                  contents: board[8] })
               )
             )
           )
@@ -9784,7 +9802,7 @@ var Cell = function (_React$Component) {
     key: "render",
     value: function render() {
       console.log("contents:", this.state.contents);
-      if (this.state.contents === "" && this.props.gameWon === false) {
+      if (this.props.contents === "" && this.props.gameWon === false) {
         return _react2.default.createElement(
           "div",
           null,
@@ -9794,7 +9812,7 @@ var Cell = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         null,
-        this.state.contents
+        this.props.contents
       );
     }
   }]);
@@ -22164,7 +22182,7 @@ var NewGame = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.props.won) {
+      if (this.props.won || this.props.turns == 9) {
         return _react2.default.createElement(
           "div",
           null,

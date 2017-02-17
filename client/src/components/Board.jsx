@@ -6,11 +6,16 @@ class Board extends React.Component {
     super(props);
     //var grid = ["0","1","2","3","4","5","6","7","8"];
     var grid = ["","","","","","","","",""];
-    this.state = { board: grid, won: false};
+    this.state = { board: this.props.board, won: false};
+  }
+
+  resetGrid() {
+    var grid = ["","","","","","","","",""];
+    this.setState = ({ board: grid, won: false});
   }
 
   checkRowsForWinner() {
-    var board = this.state.board;
+    var board = this.props.board;
     if (((board[0] !== "") && (board[0] === board[1]) &&
          (board[0] === board[2])) ||
         ((board[3] !== "") &&(board[3] === board[4]) &&
@@ -26,7 +31,7 @@ class Board extends React.Component {
   }
 
   checkColumnsForWinner() {
-    var board = this.state.board;
+    var board = this.props.board;
     if (((board[0] !== "") && (board[0] == board[3]) &&
          (board[0] === board[6])) ||
         ((board[1] !== "") &&(board[1] === board[4]) &&
@@ -41,11 +46,11 @@ class Board extends React.Component {
   }
 
   checkDiagonalsForWinner() {
-    var board = this.state.board;
-    if ((board[4] !== "") && ((board[0] === board[4]) &&
+    var board = this.props.board;
+    if ((board[4] !== "") && (((board[0] === board[4]) &&
         (board[0] === board[8])) ||
         ((board[2] === board[4]) &&
-             (board[2] === board[6]))
+             (board[2] === board[6])))
         ){
         console.log("winning diagonal:", this.props.player);
         return true;
@@ -74,7 +79,9 @@ class Board extends React.Component {
 
   takeTurn(square) {
     console.log("takeTurn:", this.props.player, square);
-    this.updateGrid(this.props.player, square);   
+    //this.updateGrid(this.props.player, square);  
+    this.props.update(square); 
+    this.checkForWinner();
     console.log("won:", this.state.won);
   }
 
@@ -89,6 +96,7 @@ class Board extends React.Component {
   }
 
   render() {
+    var board = this.props.board;
     return (
       <div>
         <h1>Tic Tac Toe</h1>
@@ -96,34 +104,34 @@ class Board extends React.Component {
           <tbody>
             <tr>
               <td><Cell id={0} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-                contents={this.state.board[0]}/>
+                contents={board[0]}/>
               </td>
               <td><Cell id={1} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-                contents={this.state.board[1]}/>
+                contents={board[1]}/>
               </td>
               <td><Cell id={2} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[2]}/>
+              contents={board[2]}/>
               </td>
             </tr>
             <tr>
               <td><Cell id={3} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[3]}/>
+              contents={board[3]}/>
               </td>
               <td><Cell id={4} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[4]}/>
+              contents={board[4]}/>
               </td>
               <td><Cell id={5} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[5]}/></td>
+              contents={board[5]}/></td>
             </tr>
             <tr>
               <td><Cell id={6} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[6]}/>
+              contents={board[6]}/>
               </td>
               <td><Cell id={7} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[7]}/>
+              contents={board[7]}/>
               </td>
               <td><Cell id={8} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={this.state.board[8]}/>
+              contents={board[8]}/>
               </td>
             </tr>                  
           </tbody>

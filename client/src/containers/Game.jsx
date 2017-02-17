@@ -6,15 +6,23 @@ import NewGame from '../components/NewGame.jsx'
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { winner: "", player: "X", turns: 0, won: false };
+    var grid = ["","","","","","","","",""];
+    this.state = { winner: "", player: "X", turns: 0, won: false, board: grid };
   }
 
   reset() {
-    this.setState({ winner: "", player: "X",  turns: 0, won: false });
+    var grid = ["","","","","","","","",""];
+    this.setState({ winner: "", player: "X",  turns: 0, won: false, board: grid });
   }
 
   setWinner() {
     this.setState({ winner: this.state.player, won: true });
+  }
+
+  updateBoard(square) {
+    var updatedGrid = this.state.board;
+    updatedGrid[square] = this.state.player;
+    this.setState({ board: updatedGrid });  
   }
 
   switchPlayer() {
@@ -30,9 +38,9 @@ class Game extends React.Component {
     return (
       <div>
         <Board player={this.state.player} changePlayer={this.switchPlayer.bind(this)} endGame={this.setWinner.bind(this)}
-          won={this.state.won} turns={this.state.turns}/>
+          won={this.state.won} turns={this.state.turns} update={this.updateBoard.bind(this)} board={this.state.board}/>
         <GameStatus winner={this.state.winner} currentPlayer={this.state.player} won={this.state.won} turns={this.state.turns}/>
-        <NewGame won={this.state.won} startNewGame={this.reset.bind(this)}/>
+        <NewGame won={this.state.won} turns={this.state.turns} startNewGame={this.reset.bind(this)}/>
       </div>
       )
   }

@@ -14,7 +14,7 @@ class Cell extends React.Component{
   
   render(){
     console.log("contents:",this.state.contents);
-    if (this.state.contents === "" && this.props.gameWon === false) {
+    if (this.props.contents === "" && this.props.gameWon === false) {
       return(
         <div>
           <button className="gridCell" onClick={this.selectSquare.bind(this)}></button>  
@@ -23,7 +23,7 @@ class Cell extends React.Component{
     }
     return (
       <div>
-        { this.state.contents }
+        { this.props.contents }
       </div>
       )
   }
