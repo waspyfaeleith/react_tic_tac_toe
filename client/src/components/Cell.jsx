@@ -13,7 +13,6 @@ class Cell extends React.Component{
   }
   
   render(){
-    console.log("contents:",this.state.contents);
     if (this.props.contents === "" && this.props.gameWon === false) {
       return(
         <div>

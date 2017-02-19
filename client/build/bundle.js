@@ -9613,7 +9613,6 @@ var Board = function (_React$Component) {
   }, {
     key: 'checkForWinner',
     value: function checkForWinner() {
-      console.log("checking for a winner");
       if (this.checkColumnsForWinner() === true || this.checkRowsForWinner() === true || this.checkDiagonalsForWinner() === true) {
         this.props.endGame();
       } else {
@@ -9767,7 +9766,6 @@ var Cell = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log("contents:", this.state.contents);
       if (this.props.contents === "" && this.props.gameWon === false) {
         return _react2.default.createElement(
           "div",

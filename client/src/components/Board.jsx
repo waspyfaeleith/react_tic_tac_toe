@@ -45,7 +45,6 @@ class Board extends React.Component {
   }
 
   checkForWinner() {
-    console.log("checking for a winner")
     if (
       (this.checkColumnsForWinner() === true) || 
       (this.checkRowsForWinner() === true) ||
