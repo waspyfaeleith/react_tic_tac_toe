@@ -4,14 +4,7 @@ import Cell from './Cell.jsx'
 class Board extends React.Component {
   constructor(props) {
     super(props);
-    //var grid = ["0","1","2","3","4","5","6","7","8"];
-    var grid = ["","","","","","","","",""];
     this.state = { board: this.props.board, won: false};
-  }
-
-  resetGrid() {
-    var grid = ["","","","","","","","",""];
-    this.setState = ({ board: grid, won: false});
   }
 
   checkRowsForWinner() {
@@ -23,8 +16,6 @@ class Board extends React.Component {
         ((board[6] !== "") &&(board[6] === board[7]) &&
          (board[6] === board[8]))
       ) {
-
-      console.log("winning row:", this.props.player)
       return true
     }
     return false
@@ -39,7 +30,6 @@ class Board extends React.Component {
         ((board[5] !== "") &&(board[2] === board[5]) &&
          (board[2] === board[8]))
       ) {
-      console.log("winning column:", this.props.player);
       return true;
     }
     return false;
@@ -47,12 +37,8 @@ class Board extends React.Component {
 
   checkDiagonalsForWinner() {
     var board = this.props.board;
-    if ((board[4] !== "") && (((board[0] === board[4]) &&
-        (board[0] === board[8])) ||
-        ((board[2] === board[4]) &&
-             (board[2] === board[6])))
-        ){
-        console.log("winning diagonal:", this.props.player);
+    if ((board[4] !== "") && (((board[0] === board[4]) && (board[0] === board[8])) ||
+        ((board[2] === board[4]) && (board[2] === board[6])))) {
         return true;
     }
     return false;
@@ -71,28 +57,9 @@ class Board extends React.Component {
       }
   }
 
-  updateGrid(player, square) {
-    var updatedGrid = this.state.board;
-    updatedGrid[square] = this.props.player;
-    this.setState({ board: updatedGrid }, this.checkForWinner);  
-  }
-
   takeTurn(square) {
-    console.log("takeTurn:", this.props.player, square);
-    //this.updateGrid(this.props.player, square);  
     this.props.update(square); 
     this.checkForWinner();
-    console.log("won:", this.state.won);
-  }
-
-  updateGame() {
-    if (this.state.won === true) {
-      console.log("we have a winner :-)");
-      this.props.endGame();
-    } else {
-      console.log("switching player");
-      this.props.changePlayer();
-    }
   }
 
   render() {

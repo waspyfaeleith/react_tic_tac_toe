@@ -26,7 +26,6 @@ class Game extends React.Component {
   }
 
   switchPlayer() {
-    console.log("switching player from " + this.state.player);
     if (this.state.player == "X") {
       this.setState({ player: "O", turns: this.state.turns + 1 });
     } else {

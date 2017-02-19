@@ -14,7 +14,7 @@ class GameStatus extends React.Component {
     }
     return(
       <div>
-        <h3>{currentState}</h3>
+        <h2>{currentState}</h2>
       </div>
       )
   }
