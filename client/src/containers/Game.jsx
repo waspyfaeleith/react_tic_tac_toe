@@ -36,10 +36,23 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Board player={this.state.player} changePlayer={this.switchPlayer.bind(this)} endGame={this.setWinner.bind(this)}
-          won={this.state.won} turns={this.state.turns} update={this.updateBoard.bind(this)} board={this.state.board}/>
-        <GameStatus winner={this.state.winner} currentPlayer={this.state.player} won={this.state.won} turns={this.state.turns}/>
-        <NewGame won={this.state.won} turns={this.state.turns} startNewGame={this.reset.bind(this)}/>
+        <Board 
+          player={this.state.player} 
+          changePlayer={this.switchPlayer.bind(this)} 
+          endGame={this.setWinner.bind(this)}
+          won={this.state.won} 
+          turns={this.state.turns} 
+          update={this.updateBoard.bind(this)} 
+          board={this.state.board}/>
+        <GameStatus 
+          winner={this.state.winner} 
+          currentPlayer={this.state.player} 
+          won={this.state.won} 
+          turns={this.state.turns}/>
+        <NewGame 
+          won={this.state.won} 
+          turns={this.state.turns} 
+          startNewGame={this.reset.bind(this)}/>
       </div>
       )
   }

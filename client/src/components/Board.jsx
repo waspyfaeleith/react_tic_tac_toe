@@ -63,43 +63,62 @@ class Board extends React.Component {
 
   render() {
     var board = this.props.board;
+
+    var cell = (index) => (
+        <Cell 
+          id={index} 
+          player={this.props.player} 
+          playSquare={this.takeTurn.bind(this)} 
+          gameWon={this.props.won}
+          contents={board[index]}/>
+    )
+
+    var row = (rowNum) => (
+        <tr>
+          {cell(rowNum)}
+          {cell(rowNum + 1)}
+          {cell(rowNum + 2)}
+        </tr>
+    )
+
     return (
       <div>
         <h1>Tic Tac Toe</h1>
         <table id="ticTacToeGrid">
           <tbody>
-            <tr>
-              <td><Cell id={0} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+          {row(0)}
+          {row(3)}
+          {row(6)}
+            {/*<tr>
+              <Cell 
+                id={0} 
+                player={this.props.player} 
+                playSquare={this.takeTurn.bind(this)} 
+                gameWon={this.props.won}
                 contents={board[0]}/>
-              </td>
-              <td><Cell id={1} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+           
+              <Cell id={1} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
                 contents={board[1]}/>
-              </td>
-              <td><Cell id={2} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={board[2]}/>
-              </td>
+              
+              <Cell id={2} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+                contents={board[2]}/>
             </tr>
             <tr>
-              <td><Cell id={3} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              <Cell id={3} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
               contents={board[3]}/>
-              </td>
-              <td><Cell id={4} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              <Cell id={4} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
               contents={board[4]}/>
-              </td>
-              <td><Cell id={5} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
-              contents={board[5]}/></td>
+              <Cell id={5} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              contents={board[5]}/>
             </tr>
             <tr>
-              <td><Cell id={6} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              <Cell id={6} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
               contents={board[6]}/>
-              </td>
-              <td><Cell id={7} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              <Cell id={7} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
               contents={board[7]}/>
-              </td>
-              <td><Cell id={8} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
+              <Cell id={8} player={this.props.player} playSquare={this.takeTurn.bind(this)} gameWon={this.props.won}
               contents={board[8]}/>
-              </td>
-            </tr>                  
+            </tr> */}                 
           </tbody>
         </table>
       </div>

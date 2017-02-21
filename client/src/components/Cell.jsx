@@ -15,15 +15,15 @@ class Cell extends React.Component{
   render(){
     if (this.props.contents === "" && this.props.gameWon === false) {
       return(
-        <div>
-          <button className="gridCell" onClick={this.selectSquare.bind(this)}></button>  
-        </div>
-    )
+        <td>
+          <button className="gridCell" onClick={this.selectSquare.bind(this)}></button>
+          </td>  
+      )
     }
     return (
-      <div>
-        { this.props.contents }
-      </div>
+        <td>
+          { this.props.contents }
+        </td>
       )
   }
   
