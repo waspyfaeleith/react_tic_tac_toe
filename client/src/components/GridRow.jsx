@@ -1,25 +1,36 @@
 import React from 'react'
-import Cell from './Cell.jsx;
+import Cell from './Cell.jsx'
 
-var GridRow = function(props) { 
-  var board = this.props.board;
+//var GridRow = function(props) { 
 
-  var cell = (index) => (
+class GridRow extends React.Component {
+  constructor(props) {
+      super(props);
+  }
+
+  playSquare(cell) {
+    this.props.playSquare(cell)
+  }
+  render() {
+    var board = this.props.board;
+
+    var cell = (index) => (
       <Cell 
         id={index} 
         player={this.props.player} 
-        playSquare={this.takeTurn.bind(this)} 
-        gameWon={this.props.won}
+        playSquare={this.playSquare.bind(this)} 
+        gameWon={this.props.gameWon}
         contents={board[index]}/>
-  )
-
-  var row = (rowNum) => (
+    )
+ 
+    return(
       <tr>
-        {cell(rowNum)}
-        {cell(rowNum + 1)}
-        {cell(rowNum + 2)}
+        {cell(this.props.firstCell)}
+        {cell(this.props.firstCell + 1)}
+        {cell(this.props.firstCell + 2)}
       </tr>
-  )
-
-
+    )
+  }
 }
+
+export default GridRow;
