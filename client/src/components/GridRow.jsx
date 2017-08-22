@@ -12,6 +12,7 @@ class GridRow extends React.Component {
   playSquare(cell) {
     this.props.playSquare(cell)
   }
+  
   render() {
     const board = this.props.board;
 

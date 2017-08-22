@@ -4,7 +4,7 @@ var config = {
     path: __dirname + '/build',
     filename: 'bundle.js'
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx']
   },

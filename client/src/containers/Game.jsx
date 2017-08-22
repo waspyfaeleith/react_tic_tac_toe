@@ -8,6 +8,10 @@ class Game extends React.Component {
     super(props);
     const grid = ["","","","","","","","",""];
     this.state = { winner: "", player: "X", turns: 0, won: false, board: grid };
+    this.reset = this.reset.bind(this);
+    this.setWinner = this.setWinner.bind(this);
+    this.updateBoard = this.updateBoard.bind(this);
+    this.switchPlayer = this.switchPlayer.bind(this);
   }
 
   reset() {
@@ -38,11 +42,11 @@ class Game extends React.Component {
       <div>
         <Board 
           player={this.state.player} 
-          changePlayer={this.switchPlayer.bind(this)} 
-          endGame={this.setWinner.bind(this)}
+          changePlayer={this.switchPlayer} 
+          endGame={this.setWinner}
           won={this.state.won} 
           turns={this.state.turns} 
-          update={this.updateBoard.bind(this)} 
+          update={this.updateBoard} 
           board={this.state.board}/>
         <GameStatus 
           winner={this.state.winner} 
@@ -52,7 +56,7 @@ class Game extends React.Component {
         <NewGame 
           won={this.state.won} 
           turns={this.state.turns} 
-          startNewGame={this.reset.bind(this)}/>
+          startNewGame={this.reset}/>
       </div>
       )
   }
