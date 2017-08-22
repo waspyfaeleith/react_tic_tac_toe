@@ -5,6 +5,7 @@ class Cell extends React.Component{
   constructor(props) {
     super(props);
     this.state = { contents: this.props.contents };
+    this.selectSquare = this.selectSquare.bind(this);
   }
 
   selectSquare() {
@@ -16,7 +17,7 @@ class Cell extends React.Component{
     if (this.props.contents === "" && this.props.gameWon === false) {
       return(
         <td>
-          <button className="gridCell" onClick={this.selectSquare.bind(this)}></button>
+          <button className="gridCell" onClick={this.selectSquare}></button>
           </td>  
       )
     }

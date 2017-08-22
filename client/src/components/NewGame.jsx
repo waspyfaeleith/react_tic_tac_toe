@@ -4,6 +4,7 @@ class NewGame extends React.Component{
 
   constructor(props) {
     super(props);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   handleButtonClick() {
@@ -14,7 +15,7 @@ class NewGame extends React.Component{
     if (this.props.won || (this.props.turns == 9)) {
       return(
         <div>
-          <button className="newGameBtn" onClick={this.handleButtonClick.bind(this)}>New Game</button> 
+          <button className="newGameBtn" onClick={this.handleButtonClick}>New Game</button> 
         </div>
       )
     } else {

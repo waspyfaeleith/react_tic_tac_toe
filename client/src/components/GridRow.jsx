@@ -6,19 +6,20 @@ import Cell from './Cell.jsx'
 class GridRow extends React.Component {
   constructor(props) {
       super(props);
+      this.playSquare = this.playSquare.bind(this);
   }
 
   playSquare(cell) {
     this.props.playSquare(cell)
   }
   render() {
-    var board = this.props.board;
+    const board = this.props.board;
 
-    var cell = (index) => (
+    const cell = (index) => (
       <Cell 
         id={index} 
         player={this.props.player} 
-        playSquare={this.playSquare.bind(this)} 
+        playSquare={this.playSquare} 
         gameWon={this.props.gameWon}
         contents={board[index]}/>
     )

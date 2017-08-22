@@ -6,12 +6,12 @@ import NewGame from '../components/NewGame.jsx'
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    var grid = ["","","","","","","","",""];
+    const grid = ["","","","","","","","",""];
     this.state = { winner: "", player: "X", turns: 0, won: false, board: grid };
   }
 
   reset() {
-    var grid = ["","","","","","","","",""];
+    const grid = ["","","","","","","","",""];
     this.setState({ winner: "", player: "X",  turns: 0, won: false, board: grid });
   }
 
@@ -20,7 +20,7 @@ class Game extends React.Component {
   }
 
   updateBoard(square) {
-    var updatedGrid = this.state.board;
+    const updatedGrid = this.state.board;
     updatedGrid[square] = this.state.player;
     this.setState({ board: updatedGrid });  
   }

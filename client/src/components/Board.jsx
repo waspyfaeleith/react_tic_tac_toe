@@ -6,10 +6,11 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = { board: this.props.board, won: false};
+    this.takeTurn = this.takeTurn.bind(this);
   }
 
   checkRowsForWinner() {
-    var board = this.props.board;
+    const board = this.props.board;
     if (((board[0] !== "") && (board[0] === board[1]) &&
          (board[0] === board[2])) ||
         ((board[3] !== "") &&(board[3] === board[4]) &&
@@ -23,7 +24,7 @@ class Board extends React.Component {
   }
 
   checkColumnsForWinner() {
-    var board = this.props.board;
+    const board = this.props.board;
     if (((board[0] !== "") && (board[0] == board[3]) &&
          (board[0] === board[6])) ||
         ((board[1] !== "") &&(board[1] === board[4]) &&
@@ -37,7 +38,7 @@ class Board extends React.Component {
   }
 
   checkDiagonalsForWinner() {
-    var board = this.props.board;
+    const board = this.props.board;
     if ((board[4] !== "") && (((board[0] === board[4]) && (board[0] === board[8])) ||
         ((board[2] === board[4]) && (board[2] === board[6])))) {
         return true;
@@ -63,13 +64,13 @@ class Board extends React.Component {
   }
 
   render() {
-    var board = this.props.board;
+    const board = this.props.board;
 
-    var row = (firstCell) => (
+    const row = (firstCell) => (
         <Row 
           firstCell={firstCell} 
           player={this.props.player} 
-          playSquare={this.takeTurn.bind(this)} 
+          playSquare={this.takeTurn} 
           gameWon={this.props.won}
           board={this.props.board}
         />

@@ -3,7 +3,7 @@ import React from 'react'
 class GameStatus extends React.Component {
   
   render(){
-    var currentState;
+    let currentState;
 
     if (this.props.winner !== "") {
       currentState = this.props.winner + " wins!";
