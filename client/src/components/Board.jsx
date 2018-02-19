@@ -2,11 +2,7 @@ import React from 'react'
 import Cell from './Cell.jsx'
 import Row from './GridRow.jsx'
 
-class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.takeTurn = this.takeTurn.bind(this);
-  }
+const Board = ({props}) => {
 
   checkRowsForWinner() {
     const board = this.props.board;
@@ -47,31 +43,31 @@ class Board extends React.Component {
 
   checkForWinner() {
     if (
-      (this.checkColumnsForWinner() === true) ||
-      (this.checkRowsForWinner() === true) ||
-      (this.checkDiagonalsForWinner() === true)
+      (checkColumnsForWinner() === true) ||
+      (checkRowsForWinner() === true) ||
+      (checkDiagonalsForWinner() === true)
       ) {
-        this.props.endGame();
+        props.endGame();
       } else {
-        this.props.changePlayer();
+        props.changePlayer();
       }
   }
 
   takeTurn(square) {
-    this.props.update(square);
-    this.checkForWinner();
+    props.update(square);
+    checkForWinner();
   }
 
   render() {
-    const board = this.props.board;
+    const board = props.board;
 
     const row = (firstCell) => (
         <Row
           firstCell={firstCell}
-          player={this.props.player}
-          playSquare={this.takeTurn}
-          gameWon={this.props.won}
-          board={this.props.board}
+          player={props.player}
+          playSquare={takeTurn}
+          gameWon={props.won}
+          board={props.board}
         />
     )
 

@@ -1,21 +1,16 @@
 import React from 'react';
 
-class NewGame extends React.Component{
-
-  constructor(props) {
-    super(props);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-  }
+const NewGame = ({props}) => {
 
   handleButtonClick() {
-    this.props.startNewGame();
+    props.startNewGame();
   }
 
   render() {
-    if (this.props.won || (this.props.turns == 9)) {
+    if (props.won || (props.turns == 9)) {
       return(
         <div>
-          <button className="newGameBtn" onClick={this.handleButtonClick}>New Game</button> 
+          <button className="newGameBtn" onClick={this.handleButtonClick}>New Game</button>
         </div>
       )
     } else {

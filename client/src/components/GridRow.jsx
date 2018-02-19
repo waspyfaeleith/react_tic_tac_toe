@@ -1,14 +1,10 @@
 import React from 'react'
 import Cell from './Cell.jsx'
 
-class GridRow extends React.Component {
-  constructor(props) {
-      super(props);
-      this.playSquare = this.playSquare.bind(this);
-  }
+const GridRow = ({props}) => {
 
   playSquare(cell) {
-    this.props.playSquare(cell)
+    props.playSquare(cell)
   }
 
   render() {
@@ -17,17 +13,17 @@ class GridRow extends React.Component {
     const cell = (index) => (
       <Cell
         id={index}
-        player={this.props.player}
-        playSquare={this.playSquare}
-        gameWon={this.props.gameWon}
+        player={props.player}
+        playSquare={playSquare}
+        gameWon={props.gameWon}
         contents={board[index]}/>
     )
 
     return(
       <tr>
-        {cell(this.props.firstCell)}
-        {cell(this.props.firstCell + 1)}
-        {cell(this.props.firstCell + 2)}
+        {cell(props.firstCell)}
+        {cell(props.firstCell + 1)}
+        {cell(props.firstCell + 2)}
       </tr>
     )
   }

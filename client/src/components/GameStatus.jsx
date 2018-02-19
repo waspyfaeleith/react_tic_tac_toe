@@ -1,16 +1,15 @@
 import React from 'react'
 
-class GameStatus extends React.Component {
-  
+const GameStatus = ({props}) => {
   render(){
     let currentState;
 
-    if (this.props.winner !== "") {
+    if (props.winner !== "") {
       currentState = this.props.winner + " wins!";
-    } else if (!this.props.won && this.props.turns === 9) {
+    } else if (!props.won && props.turns === 9) {
       currentState = "It's a tie";
     } else {
-      currentState = this.props.currentPlayer + " to go.";
+      currentState = props.currentPlayer + " to go.";
     }
     return(
       <div>
