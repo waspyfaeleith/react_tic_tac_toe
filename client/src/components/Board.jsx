@@ -5,7 +5,6 @@ import Row from './GridRow.jsx'
 class Board extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { board: this.props.board, won: false};
     this.takeTurn = this.takeTurn.bind(this);
   }
 
@@ -48,9 +47,9 @@ class Board extends React.Component {
 
   checkForWinner() {
     if (
-      (this.checkColumnsForWinner() === true) || 
+      (this.checkColumnsForWinner() === true) ||
       (this.checkRowsForWinner() === true) ||
-      (this.checkDiagonalsForWinner() === true) 
+      (this.checkDiagonalsForWinner() === true)
       ) {
         this.props.endGame();
       } else {
@@ -59,7 +58,7 @@ class Board extends React.Component {
   }
 
   takeTurn(square) {
-    this.props.update(square); 
+    this.props.update(square);
     this.checkForWinner();
   }
 
@@ -67,10 +66,10 @@ class Board extends React.Component {
     const board = this.props.board;
 
     const row = (firstCell) => (
-        <Row 
-          firstCell={firstCell} 
-          player={this.props.player} 
-          playSquare={this.takeTurn} 
+        <Row
+          firstCell={firstCell}
+          player={this.props.player}
+          playSquare={this.takeTurn}
           gameWon={this.props.won}
           board={this.props.board}
         />
@@ -83,7 +82,7 @@ class Board extends React.Component {
           <tbody>
             {row(0)}
             {row(3)}
-            {row(6)}     
+            {row(6)}
           </tbody>
         </table>
       </div>

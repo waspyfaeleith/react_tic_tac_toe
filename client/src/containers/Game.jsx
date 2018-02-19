@@ -26,7 +26,7 @@ class Game extends React.Component {
   updateBoard(square) {
     const updatedGrid = this.state.board;
     updatedGrid[square] = this.state.player;
-    this.setState({ board: updatedGrid });  
+    this.setState({ board: updatedGrid });
   }
 
   switchPlayer() {
@@ -40,22 +40,23 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <Board 
-          player={this.state.player} 
-          changePlayer={this.switchPlayer} 
+        <Board
+          player={this.state.player}
+          changePlayer={this.switchPlayer}
           endGame={this.setWinner}
-          won={this.state.won} 
-          turns={this.state.turns} 
-          update={this.updateBoard} 
-          board={this.state.board}/>
-        <GameStatus 
-          winner={this.state.winner} 
-          currentPlayer={this.state.player} 
-          won={this.state.won} 
+          won={this.state.won}
+          turns={this.state.turns}
+          update={this.updateBoard}
+          board={this.state.board}
+        />
+        <GameStatus
+          winner={this.state.winner}
+          currentPlayer={this.state.player}
+          won={this.state.won}
           turns={this.state.turns}/>
-        <NewGame 
-          won={this.state.won} 
-          turns={this.state.turns} 
+        <NewGame
+          won={this.state.won}
+          turns={this.state.turns}
           startNewGame={this.reset}/>
       </div>
       )
