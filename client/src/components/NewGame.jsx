@@ -1,21 +1,19 @@
 import React from 'react';
 
-const NewGame = ({props}) => {
+const NewGame = props => {
 
-  handleButtonClick() {
+  const handleButtonClick = function () {
     props.startNewGame();
   }
 
-  render() {
-    if (props.won || (props.turns == 9)) {
-      return(
-        <div>
-          <button className="newGameBtn" onClick={this.handleButtonClick}>New Game</button>
-        </div>
-      )
-    } else {
-      return (<div></div>)
-    }
+  if (props.won || (props.turns == 9)) {
+    return(
+      <div>
+        <button className="newGameBtn" onClick={handleButtonClick}>New Game</button>
+      </div>
+    )
+  } else {
+    return (<div></div>)
   }
 }
 
