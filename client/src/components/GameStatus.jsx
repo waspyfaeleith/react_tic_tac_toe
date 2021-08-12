@@ -1,14 +1,14 @@
 import React from 'react'
 
-const GameStatus = props => {
+const GameStatus = ({winner, turns, won, currentPlayer }) => {
   let currentState;
 
-  if (props.winner !== "") {
-    currentState = props.winner + " wins!";
-  } else if (!props.won && props.turns === 9) {
+  if (winner !== "") {
+    currentState = winner + " wins!";
+  } else if (!won && turns === 9) {
     currentState = "It's a tie";
   } else {
-    currentState = props.currentPlayer + " to go.";
+    currentState = currentPlayer + " to go.";
   }
   return(
     <div>

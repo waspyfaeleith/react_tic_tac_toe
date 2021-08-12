@@ -1,32 +1,28 @@
-import React from 'react';
+import React, { useState }from 'react';
 
-class Cell extends React.Component{
+const Cell = ({playSquare, contents, id, gameWon, player }) => {
 
-  constructor(props) {
-    super(props);
-    this.state = { contents: this.props.contents };
-    this.selectSquare = this.selectSquare.bind(this);
+  const [cellContents, setCellContents] = useState(contents)
+
+  const selectSquare = () => {
+    playSquare(id);
+    setCellContents(player);
   }
 
-  selectSquare() {
-    this.props.playSquare(this.props.id);
-    this.setState({ contents: this.props.contents });
-  }
 
-  render(){
-    if (this.props.contents === "" && this.props.gameWon === false) {
-      return(
-        <td>
-          <button className="gridCell" onClick={this.selectSquare}></button>
-          </td>
-      )
-    }
-    return (
-        <td>
-          { this.props.contents }
-        </td>
-      )
+  if (cellContents === "" && gameWon === false) {
+     return(
+       <td>
+         <button className="gridCell" onClick={selectSquare}>{cellContents}</button>
+       </td>
+    )
   }
+  
+  return (
+    <td>
+      { cellContents }
+    </td>
+  )
 
 }
 

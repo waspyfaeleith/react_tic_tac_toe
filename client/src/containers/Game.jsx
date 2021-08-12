@@ -1,66 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Board from '../components/Board.jsx'
 import GameStatus from '../components/GameStatus.jsx'
 import NewGame from '../components/NewGame.jsx'
 
-class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    const grid = ["","","","","","","","",""];
-    this.state = { winner: "", player: "X", turns: 0, won: false, board: grid };
-    this.reset = this.reset.bind(this);
-    this.setWinner = this.setWinner.bind(this);
-    this.updateBoard = this.updateBoard.bind(this);
-    this.switchPlayer = this.switchPlayer.bind(this);
+const Game = () =>  {
+
+  const grid = ["","","","","","","","",""];
+
+  const [winner, setWinner] = useState("");
+  const [player, setPlayer] = useState("A");
+  const [turns, setTurns] = useState(0);
+  const [won, setWon] = useState(false);
+  const [board, setBoard] = useState(grid);
+  
+  const reset = () => {
+    setWinner("");
+    setPlayer("A");
+    setTurns(0);
+    setWon(false);
+    setBoard(grid)
   }
 
-  reset() {
-    const grid = ["","","","","","","","",""];
-    this.setState({ winner: "", player: "X",  turns: 0, won: false, board: grid });
+  const setGameWinner = () => {
+    setWinner(player);
+    setWon(true);
   }
 
-  setWinner() {
-    this.setState({ winner: this.state.player, won: true });
+  const updateBoard = (square) => {
+    let updatedGrid = board;
+    updatedGrid[square] = player;
+    setBoard(updatedGrid);
   }
 
-  updateBoard(square) {
-    const updatedGrid = this.state.board;
-    updatedGrid[square] = this.state.player;
-    this.setState({ board: updatedGrid });
-  }
-
-  switchPlayer() {
-    if (this.state.player == "X") {
-      this.setState({ player: "O", turns: this.state.turns + 1 });
+  const switchPlayer = () =>  {
+    if (player == "A") {
+      setPlayer("B");
     } else {
-      this.setState({ player: "X", turns: this.state.turns + 1 });
+      setPlayer("A")
     }
+    setTurns(turns + 1);
   }
 
-  render() {
-    return (
+  return (
       <div>
         <Board
-          player={this.state.player}
-          changePlayer={this.switchPlayer}
-          endGame={this.setWinner}
-          won={this.state.won}
-          turns={this.state.turns}
-          update={this.updateBoard}
-          board={this.state.board}
+          player={player}
+          changePlayer={switchPlayer}
+          endGame={setGameWinner}
+          won={won}
+          turns={turns}
+          update={updateBoard}
+          board={board}
         />
         <GameStatus
-          winner={this.state.winner}
-          currentPlayer={this.state.player}
-          won={this.state.won}
-          turns={this.state.turns}/>
+          winner={winner}
+          currentPlayer={player}
+          won={won}
+          turns={turns}/>
         <NewGame
-          won={this.state.won}
-          turns={this.state.turns}
-          startNewGame={this.reset}/>
+          won={won}
+          turns={turns}
+          startNewGame={reset}/>
       </div>
       )
-  }
 }
 
 export default Game;
