@@ -7,18 +7,21 @@ const Game = () =>  {
 
   const grid = ["","","","","","","","",""];
 
+  const player1 = "X";
+  const player2 = "O";
+
   const [winner, setWinner] = useState("");
-  const [player, setPlayer] = useState("A");
+  const [player, setPlayer] = useState(player1);
   const [turns, setTurns] = useState(0);
   const [won, setWon] = useState(false);
   const [board, setBoard] = useState(grid);
   
   const reset = () => {
+    setBoard(grid);
     setWinner("");
-    setPlayer("A");
+    setPlayer(player1);
     setTurns(0);
     setWon(false);
-    setBoard(grid)
   }
 
   const setGameWinner = () => {
@@ -33,10 +36,10 @@ const Game = () =>  {
   }
 
   const switchPlayer = () =>  {
-    if (player == "A") {
-      setPlayer("B");
+    if (player === player1) {
+      setPlayer(player2);
     } else {
-      setPlayer("A")
+      setPlayer(player1)
     }
     setTurns(turns + 1);
   }

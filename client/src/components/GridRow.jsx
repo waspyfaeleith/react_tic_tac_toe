@@ -7,8 +7,6 @@ const GridRow = ({player, gameWon, firstCell, board, playSquare}) => {
     playSquare(cell)
   }
 
-  //const board = board;
-
   const cell = (index) => (
     <Cell
       id={index}

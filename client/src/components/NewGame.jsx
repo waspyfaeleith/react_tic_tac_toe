@@ -1,12 +1,12 @@
 import React from 'react';
 
-const NewGame = (startNewGame, won, turns) => {
+const NewGame = ({startNewGame, won, turns}) => {
 
   const handleButtonClick = () => {
     startNewGame();
   }
 
-  if (won || (turns == 9)) {
+  if (won === true || (turns === 9)) {
     return(
       <div>
         <button className="newGameBtn" onClick={handleButtonClick}>New Game</button>
