@@ -2,10 +2,9 @@ import React from 'react'
 import Cell from './Cell.jsx'
 import Row from './GridRow.jsx'
 
-const Board = props => {
+const Board = ({ board, player, endGame, changePlayer, won, update, switchPlayer }) => {
 
-  const checkRowsForWinner = function () {
-    const board = props.board;
+  const checkRowsForWinner = () => {
     if (((board[0] !== "") && (board[0] === board[1]) &&
          (board[0] === board[2])) ||
         ((board[3] !== "") &&(board[3] === board[4]) &&
@@ -18,8 +17,7 @@ const Board = props => {
     return false
   }
 
-  const checkColumnsForWinner = function () {
-    const board = props.board;
+  const checkColumnsForWinner = () => {
     if (((board[0] !== "") && (board[0] === board[3]) &&
          (board[0] === board[6])) ||
         ((board[1] !== "") &&(board[1] === board[4]) &&
@@ -32,8 +30,7 @@ const Board = props => {
     return false;
   }
 
-  const checkDiagonalsForWinner = function () {
-    const board = props.board;
+  const checkDiagonalsForWinner = () => {
     if ((board[4] !== "") && (((board[0] === board[4]) && (board[0] === board[8])) ||
         ((board[2] === board[4]) && (board[2] === board[6])))) {
         return true;
@@ -41,32 +38,30 @@ const Board = props => {
     return false;
   }
 
-  const checkForWinner = function () {
+  const checkForWinner = () => {
     if (
       (checkColumnsForWinner() === true) ||
       (checkRowsForWinner() === true) ||
       (checkDiagonalsForWinner() === true)
       ) {
-        props.endGame();
+        endGame();
       } else {
-        props.changePlayer();
+        changePlayer();
       }
   }
 
-  const takeTurn = function (square) {
-    props.update(square);
+  const takeTurn = (square) => {
+    update(square);
     checkForWinner();
   }
-
-
 
   const row = (firstCell) => (
       <Row
         firstCell={firstCell}
-        player={props.player}
+        player={player}
         playSquare={takeTurn}
-        gameWon={props.won}
-        board={props.board}
+        gameWon={won}
+        board={board}
       />
   )
 

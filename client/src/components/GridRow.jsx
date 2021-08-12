@@ -1,28 +1,26 @@
 import React from 'react'
 import Cell from './Cell.jsx'
 
-const GridRow = props => {
+const GridRow = ({player, gameWon, firstCell, board, playSquare}) => {
 
-  const playSquare = function(cell) {
-    props.playSquare(cell)
+  const selectSquare = (cell) => {
+    playSquare(cell)
   }
-
-  const board = props.board;
 
   const cell = (index) => (
     <Cell
       id={index}
-      player={props.player}
-      playSquare={playSquare}
-      gameWon={props.gameWon}
+      player={player}
+      playSquare={selectSquare}
+      gameWon={gameWon}
       contents={board[index]}/>
   )
 
   return(
     <tr>
-      {cell(props.firstCell)}
-      {cell(props.firstCell + 1)}
-      {cell(props.firstCell + 2)}
+      {cell(firstCell)}
+      {cell(firstCell + 1)}
+      {cell(firstCell + 2)}
     </tr>
   )
 }
